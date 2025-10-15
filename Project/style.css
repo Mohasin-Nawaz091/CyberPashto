@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: #f8f9fa; 
+    min-height: 100vh;
+}
+.container-fluid.p-0 {
+    min-height: 100vh;
+}
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+.table th {
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 2px solid #e9ecef;
+}
+.list-group-item.active {
+    border-radius: 8px;
+}
+.dashboard-header {
+    background: linear-gradient(135deg, #1e3a8a, #4f46e5);
+    color: white;
+    padding: 3rem 1.5rem;
+    border-radius: 0 0 15px 15px;
+    margin-bottom: 2rem;
+}
+#team-sidebar {
+    background-color: #f1f5f9; 
+    border-right: 1px solid #e2e8f0;
+    border-radius: 12px 0 0 12px;
+}
+#teamList .list-group-item {
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+#teamList .list-group-item:hover:not(.active) {
+    background-color: #e0e7ff;
+}
+.status-select {
+    max-width: 150px;
+    font-size: 0.875rem;
+    border-radius: 6px;
+}
+.status-badge {
+    min-width: 80px;
+    font-weight: 600;
+    padding: 0.5em 0.7em;
+    border-radius: 10px;
+}
+body.dark-mode {
+    background-color: #1e293b; 
+    color: #f1f5f9; 
+}
+body.dark-mode .card {
+    background-color: #334155; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+body.dark-mode .table {
+    --bs-table-bg: #334155;
+    --bs-table-color: #f1f5f9;
+}
+body.dark-mode .table th {
+    color: #94a3b8;
+    border-bottom-color: #475569;
+}
+body.dark-mode .form-control,
+body.dark-mode .form-select,
+body.dark-mode .input-group-text {
+    background-color: #475569;
+    border-color: #64748b;
+    color: #f1f5f9;
+}
+body.dark-mode #team-sidebar {
+    background-color: #334155;
+    border-right-color: #475569;
+}
+body.dark-mode .list-group-item {
+    background-color: transparent;
+    color: #f1f5f9;
+}
+body.dark-mode #teamList .list-group-item:hover:not(.active) {
+    background-color: #475569;
+}
+body.dark-mode .list-group-item.active {
+    background-color: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+}
+body.dark-mode .text-muted {
+    color: #a0aec0 !important;
+}
