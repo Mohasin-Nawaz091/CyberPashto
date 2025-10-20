@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,50 +7,71 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body id="team-page">
     <div class="container-fluid p-0">
-        <div class="row g-0">
+        <div classs="row g-0">
             <div id="team-sidebar" class="col-12 col-md-3 p-4">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h4 class="fw-bold mb-0 text-dark-emphasis"><i class="fas fa-list-alt me-2"></i> All Teams</h4>
-                    <a href="index.html" class="btn btn-sm btn-outline-secondary"><i class="fas fa-sign-out-alt"></i></a>
-                    <button id="theme-toggle" class="btn btn-sm btn-outline-secondary" title="Toggle Theme">
-                        <i id="theme-icon" class="fas fa-moon"></i>
-                    </button>
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                    <h4 class="fw-bold mb-0 me-3" style="color: var(--primary-color)"><i class="fas fa-list-alt me-2"></i> All Teams</h4>
+                    
+                    <div class="d-flex align-items-center mt-2 mt-md-0">
+                        <button id="lang-toggle" class="btn btn-sm btn-outline-secondary me-2 fw-bold" data-i18n="language.toggle">پښتو</button>
+                        
+                        <a href="index.html" class="btn btn-sm btn-outline-secondary me-2" title="Home"><i class="fas fa-home"></i></a>
+                        <button id="theme-toggle" class="btn btn-sm btn-outline-secondary" title="Toggle Theme">
+                            <i id="theme-icon" class="fas fa-moon"></i>
+                        </button>
+                         </div>
                 </div>
                 <div class="list-group" id="teamList">
                 </div>
             </div>
             <div class="col-12 col-md-9 p-4 p-md-5">
                 <div id="teamDetailsHeader" class="mb-4">
-                    <h1 class="display-6 text-muted">Select a Team</h1>
+                    <h1 class="display-6 text-muted" data-i18n="team.view">Select a Team</h1>
                     <p class="lead">Please select a team from the list on the left to view members and update status.</p>
                 </div>
 
-                <div class="card p-4">
-                    <h5 class="fw-bold mb-3"><i class="fas fa-users-viewfinder me-2"></i> Team Members & Status</h5>
-                    <div class="table-responsive">
-                        <table class="table table-striped align-middle">
-                            <thead>
-                                <tr>
-                                    <th style="width: 20%;">Name</th>
-                                    <th style="width: 30%;">Email</th>
-                                    <th style="width: 15%;">Role</th>
-                                    <th style="width: 20%;">Update Status</th>
-                                    <th class="text-center" style="width: 15%;">Current Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="teamMembersTableBody">
-                            </tbody>
-                        </table>
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="card p-4">
+                            <h5 class="fw-bold mb-3" style="color: var(--primary-color);"><i class="fas fa-users-viewfinder me-2"></i> Team Members & Status</h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 25%;" data-i18n="name">Name</th>
+                                            <th style="width: 20%;" data-i18n="role">Role / Level</th>
+                                            <th style="width: 15%;" data-i18n="mood">Mood</th>
+                                            <th style="width: 20%;" data-i18n="update.status">Update Status</th>
+                                            <th class="text-center" style="width: 20%;" data-i18n="status">Current Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="teamMembersTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card p-3">
+                             <h5 class="fw-bold mb-3" style="color: var(--primary-color);"><i class="fas fa-clipboard me-2"></i> Team Notes</h5>
+                             <textarea id="teamNotes" class="form-control" rows="10" placeholder="Type team-specific notes here..."></textarea>
+                             <button id="saveNotesBtn" class="btn btn-primary btn-sm mt-3">Save Notes</button>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 
+    <div id="toast-container"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="auth.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
