@@ -717,38 +717,33 @@ const processVoiceCommand = (command) => {
     }
 };
 
-const exportToPDF = (elementId, filename) => {
-    const element = document.getElementById(elementId);
-    if (!element) {
-        showToast('Element not found for PDF export.', 'error');
-        return;
-    }
+const exportToCSV = () => {
+    let csv = "Teams Data\n";
+    csv += "Team Name,Description,Members Count\n";
 
-    const body = document.body;
-    const isDark = body.classList.contains('dark-mode');
-    if (isDark) {
-        body.classList.remove('dark-mode');
-    
-        renderStatsDashboard();
-    }
-
-    const options = {
-        margin: 10,
-        filename: filename,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
-
-    html2pdf().set(options).from(element).save().finally(() => {
-     
-        if (isDark) {
-            body.classList.add('dark-mode');
-   
-            renderStatsDashboard();
-        }
-        showToast('PDF report generated!', 'success');
+    teams.forEach(team => {
+        const memberCount = members.filter(m => m.teamId === team.id).length;
+        csv += `"${team.name}","${team.description}",${memberCount}\n`;
     });
+
+    csv += "\n\nMembers Data\n";
+    csv += "Name,Email,Role,Team,Status,Level,XP,Mood,Skills\n";
+
+    members.forEach(member => {
+        const teamName = teams.find(t => t.id === member.teamId)?.name || "Unassigned";
+        csv += `"${member.name}","${member.email}","${member.role}","${teamName}","${member.status}",${member.level},${member.xp},"${member.mood}","${(member.skills || []).join(', ')}"\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `CyberPashto_Report_${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('CSV file exported successfully!', 'success');
 };
 
 
@@ -1193,7 +1188,8 @@ const setupAdminEventListeners = () => {
     document.getElementById('memberStatusFilter')?.addEventListener('change', renderMemberTable); 
 
 
-    document.getElementById('exportPdfBtn')?.addEventListener('click', () => exportToPDF('admin-content-to-export', 'CyberPashto_Admin_Report.pdf'));
+    document.getElementById('exportCsvBtn')?.addEventListener('click', exportToCSV);
+
     document.getElementById('backupDataBtn')?.addEventListener('click', backupData);
     document.getElementById('restoreDataBtn')?.addEventListener('click', () => document.getElementById('restoreFileInput').click());
     document.getElementById('restoreFileInput')?.addEventListener('change', restoreData);
